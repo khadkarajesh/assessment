@@ -8,7 +8,7 @@ LOG_FORMAT_REGEX = r"^[0-9]+\|[0-9]+\|[A-Z]{2}$"
 OUTPUT_FILE_NAME_PREFIX = "country_top50_"
 
 
-def get_song_by_country(file) -> dict:
+def _get_song_by_country(file) -> dict:
     country_song_dict = {}
     for line in file:
         pattern = re.compile(LOG_FORMAT_REGEX)
@@ -28,25 +28,25 @@ def get_song_by_country(file) -> dict:
     return country_song_dict
 
 
-def generate_file(values: List[str], file_name: str, output_path: Path) -> None:
-    with open(output_path / generate_file_name(file_name), "w") as result_file:
+def _generate_file(values: List[str], file_name: str, output_path: Path) -> None:
+    with open(output_path / _generate_file_name(file_name), "w") as result_file:
         result_file.writelines(values)
 
 
-def generate_file_name(input_file_name: str) -> str:
+def _generate_file_name(input_file_name: str) -> str:
     log_file_date = input_file_name[7:18]
     return f"{OUTPUT_FILE_NAME_PREFIX}{log_file_date}.txt"
 
 
-def sort_by_value(data: dict, reverse: bool = True) -> dict:
+def _sort_by_value(data: dict, reverse: bool = True) -> dict:
     return {k: v for k, v in sorted(data.items(), key=lambda item: item[1], reverse=reverse)}
 
 
-def extract_top_n_songs(n: int, count_dict: dict) -> List[str]:
+def _extract_top_n_songs(n: int, count_dict: dict) -> List[str]:
     result = []
     for key in count_dict.keys():
         songs_dict = count_dict.get(key)
-        sorted_songs_dict = sort_by_value(songs_dict)
+        sorted_songs_dict = _sort_by_value(songs_dict)
         song_txt = ""
         top_songs_keys = list(sorted_songs_dict.keys())[0:n]
         for song in top_songs_keys:
@@ -61,8 +61,8 @@ def get_top_songs(n: int,
                   input_file) -> None:
     try:
         with open(data_path / 'input' / input_file) as f:
-            data = get_song_by_country(f)
-            top_n_songs = extract_top_n_songs(n=n, count_dict=data)
-            generate_file(top_n_songs, input_file, output_path=output_path)
+            data = _get_song_by_country(f)
+            top_n_songs = _extract_top_n_songs(n=n, count_dict=data)
+            _generate_file(top_n_songs, input_file, output_path=output_path)
     except FileNotFoundError as e:
         logger.error(e)
