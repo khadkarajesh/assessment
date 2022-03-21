@@ -28,7 +28,7 @@ def _get_song_by_country(file) -> dict:
     return country_song_dict
 
 
-def _generate_file(values: List[str], file_name: str, output_path: Path) -> None:
+def _save(values: List[str], file_name: str, output_path: Path) -> None:
     with open(output_path / _generate_file_name(file_name), "w") as result_file:
         result_file.writelines(values)
 
@@ -63,6 +63,6 @@ def get_top_songs(n: int,
         with open(data_path / 'input' / input_file) as f:
             data = _get_song_by_country(f)
             top_n_songs = _extract_top_n_songs(n=n, count_dict=data)
-            _generate_file(top_n_songs, input_file, output_path=output_path)
+            _save(top_n_songs, input_file, output_path=output_path)
     except FileNotFoundError as e:
         logger.error(e)
