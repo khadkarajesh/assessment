@@ -29,11 +29,11 @@ def _get_song_by_country(file) -> dict:
 
 
 def _save(values: List[str], file_name: str, output_path: Path) -> None:
-    with open(output_path / _generate_file_name(file_name), "w") as result_file:
+    with open(output_path / _create_file_name(file_name), "w") as result_file:
         result_file.writelines(values)
 
 
-def _generate_file_name(input_file_name: str) -> str:
+def _create_file_name(input_file_name: str) -> str:
     log_file_date = input_file_name[7:18]
     return f"{OUTPUT_FILE_NAME_PREFIX}{log_file_date}.txt"
 
