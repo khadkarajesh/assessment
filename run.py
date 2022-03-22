@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 
 from country_top_song import CountryTopSong
+from user_top_song import UserTopSong
 
 DATA_PATH = Path.cwd() / 'data'
 INPUT_PATH = DATA_PATH / 'input'
@@ -15,8 +16,12 @@ def prepare_args(names: List[str]):
     return [[50, DATA_PATH, OUTPUT_PATH, name] for name in names]
 
 
-def wrapper(p):
+def country_song_wrapper(p):
     return CountryTopSong(*p).discover()
+
+
+def user_song_wrapper(p):
+    return UserTopSong(*p).discover()
 
 
 if __name__ == "__main__":
@@ -31,8 +36,10 @@ if __name__ == "__main__":
 
     results = prepare_args(names=file_names)
 
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     results = executor.map(country_song_wrapper, results)
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        results = executor.map(wrapper, results)
+        results = executor.map(user_song_wrapper, results)
     elapsed_time = time.time() - start_time
 
     print(f"Job completed. Elapsed time {round(elapsed_time, 2)} sec")
