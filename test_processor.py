@@ -34,11 +34,9 @@ def test_sort_by_value_should_sort_dict_in_reverse_order():
     assert actual_dict == expected_dict
 
 
-def test_get_filename_should_generate_output_filename():
-    input_file_name = "listen-2022-03-20.log"
-    actual_output_filename = processor.get_filename(input_file_name)
-    expected_filename = "country_top50_2022-03-20.txt"
-    assert actual_output_filename == expected_filename
+def test_get_filename_should_generate_output_filename(filename, output_filename):
+    actual_output_filename = processor.get_filename(filename)
+    assert actual_output_filename == output_filename
 
 
 def test_count_frequency_of_songs_by_country_should_return_songs_counts_as_by_country(input_file):
