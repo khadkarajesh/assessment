@@ -33,11 +33,11 @@ def _save(values: List[str], file_name: str, output_path: Path) -> None:
 
 
 def _get_filename(input_file_name: str) -> str:
-    log_file_date = input_file_name[7:18]
+    log_file_date = input_file_name[7:17]
     return f"{OUTPUT_FILE_NAME_PREFIX}{log_file_date}.txt"
 
 
-def _sort_by_value(data: dict, reverse: bool = True) -> dict:
+def sort_by_value(data: dict, reverse: bool = True) -> dict:
     return {k: v for k, v in sorted(data.items(), key=lambda item: item[1], reverse=reverse)}
 
 
@@ -45,7 +45,7 @@ def _filter_top_n_songs(n: int, count_dict: dict) -> List[str]:
     result = []
     for key in count_dict.keys():
         songs_dict = count_dict.get(key)
-        sorted_songs_dict = _sort_by_value(songs_dict)
+        sorted_songs_dict = sort_by_value(songs_dict)
         song_txt = ""
         top_songs_keys = list(sorted_songs_dict.keys())[0:n]
         for song in top_songs_keys:

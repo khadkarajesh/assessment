@@ -29,10 +29,12 @@ if __name__ == "__main__":
     dates = [(today - datetime.timedelta(days=x)).strftime("%Y-%m-%d") for x in range(1, 8)]
     file_names = [f"listen-{date}.log" for date in dates]
 
-    results = prepare_args(names=file_names)
+    # results = prepare_args(names=file_names)
+    #
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     results = executor.map(wrapper, results)
+    # elapsed_time = time.time() - start_time
+    #
+    # print(f"Job completed. Elapsed time {round(elapsed_time, 2)} sec")
 
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        results = executor.map(wrapper, results)
-    elapsed_time = time.time() - start_time
-
-    print(f"Job completed. Elapsed time {round(elapsed_time, 2)} sec")
+    get_top_songs(n=50, data_path=DATA_PATH, output_path=OUTPUT_PATH, input_file=file_names[3])
