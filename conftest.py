@@ -1,6 +1,7 @@
 import pytest
 
 from country_top_song import CountryTopSong
+from user_top_song import UserTopSong
 
 
 @pytest.fixture
@@ -16,6 +17,11 @@ def filename():
 @pytest.fixture
 def output_filename():
     return "country_top50_2022-03-20.txt"
+
+
+@pytest.fixture
+def user_output_filename():
+    return "user_top50_2022-03-20.txt"
 
 
 @pytest.fixture
@@ -48,3 +54,11 @@ def country_top_song(data_path, output_path, input_file_name):
                           data_path=data_path,
                           output_path=output_path,
                           input_file=input_file_name)
+
+
+@pytest.fixture
+def user_top_song(data_path, output_path, input_file_name):
+    return UserTopSong(n=1,
+                       data_path=data_path,
+                       output_path=output_path,
+                       input_file=input_file_name)
