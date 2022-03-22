@@ -47,7 +47,6 @@ if __name__ == "__main__":
     if action_type == "country_top_50_song":
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = executor.map(country_song_wrapper, results)
-            results = executor.map(user_song_wrapper, results)
     else:
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = executor.map(user_song_wrapper, results)
