@@ -1,10 +1,10 @@
+import concurrent.futures
 import datetime
+import time
 from pathlib import Path
 from typing import List
-import concurrent.futures
-import time
 
-from processor import get_top_songs
+from country_top_song import CountryTopSong
 
 DATA_PATH = Path.cwd() / 'data'
 INPUT_PATH = DATA_PATH / 'input'
@@ -16,7 +16,7 @@ def prepare_args(names: List[str]):
 
 
 def wrapper(p):
-    return get_top_songs(*p)
+    return CountryTopSong(*p).discover()
 
 
 if __name__ == "__main__":
@@ -29,12 +29,10 @@ if __name__ == "__main__":
     dates = [(today - datetime.timedelta(days=x)).strftime("%Y-%m-%d") for x in range(1, 8)]
     file_names = [f"listen-{date}.log" for date in dates]
 
-    # results = prepare_args(names=file_names)
-    #
-    # with concurrent.futures.ProcessPoolExecutor() as executor:
-    #     results = executor.map(wrapper, results)
-    # elapsed_time = time.time() - start_time
-    #
-    # print(f"Job completed. Elapsed time {round(elapsed_time, 2)} sec")
+    results = prepare_args(names=file_names)
 
-    get_top_songs(n=50, data_path=DATA_PATH, output_path=OUTPUT_PATH, input_file=file_names[3])
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        results = executor.map(wrapper, results)
+    elapsed_time = time.time() - start_time
+
+    print(f"Job completed. Elapsed time {round(elapsed_time, 2)} sec")
