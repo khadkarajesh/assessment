@@ -39,7 +39,11 @@ Output will be generated inside directory `data/output` as
 ![](media/output_directory_example.png)
 
 ### Benchmark
+
 |   | Feature                   | Number of Records | Multiprocessing | Multithreading | Tested Machine                                                                 |
 |---|---------------------------|-------------------|-----------------|----------------|--------------------------------------------------------------------------------|
 | 1 | country wise top 50 songs | 1999998           | ~8 Sec          | ~34 Sec        | MacBook Pro Processor 2.2GHz Quad-Core Intel Core i7 Memory 16GM 1600 MHz DDR3 |
 | 2 | user wise top 50 songs    | 1999998           | ~9 Sec          | ~34 Sec        | MacBook Pro Processor 2.2GHz Quad-Core Intel Core i7 Memory 16GM 1600 MHz DDR3 |
+
+### Improvement
+Counting of the country and user's top 50 songs can be done in single pass which will take less time in comparison with doing individually. However, I have treated as individual feature.  
