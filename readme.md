@@ -4,6 +4,7 @@
 - Generate report for top50 songs listened by user per day
 - Logger has been implemented, any exception will be logged in `app.log` file
 - Test cases has been added for all functions
+- Application continues even if the log file for specific date doesn't exist however application logs in `app.log` for further tracing.
 
 ### How to Run
 
@@ -46,4 +47,5 @@ Output will be generated inside directory `data/output` as
 | 2 | user wise top 50 songs    | 1999998           | ~9 Sec          | ~34 Sec        | MacBook Pro Processor 2.2GHz Quad-Core Intel Core i7 Memory 16GM 1600 MHz DDR3 |
 
 ### Improvement
-Counting of the country and user's top 50 songs can be done in single pass which will take less time in comparison with doing individually. However, I have treated as individual feature.  
+- Counting of the country and user's top 50 songs can be done in single pass which will take less time in comparison with doing individually. However, I have treated as individual feature.  
+- If this functionality needs to be accessed from any user interface, then it needs to be handled in background jobs by means of celery, redis etc..
