@@ -1,7 +1,7 @@
 import pytest
 
-from country_top_song import CountryTopSong
-from user_top_song import UserTopSong
+from song.country_top_song import CountryTopSong
+from song.user_top_song import UserTopSong
 
 
 @pytest.fixture

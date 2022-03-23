@@ -5,8 +5,8 @@ import time
 from pathlib import Path
 from typing import List
 
-from country_top_song import CountryTopSong
-from user_top_song import UserTopSong
+from song.country_top_song import CountryTopSong
+from song.user_top_song import UserTopSong
 
 DATA_PATH = Path.cwd() / 'data'
 INPUT_PATH = DATA_PATH / 'input'

@@ -1,8 +1,8 @@
 import re
 from pathlib import Path
 
-from country_top_song import LOG_FORMAT_REGEX
-from top_song import TopSong
+from song.country_top_song import LOG_FORMAT_REGEX
+from song.top_song import TopSong
 from utils import sort_by_value
 
 OUTPUT_FILE_NAME_PREFIX = "user_top50_"

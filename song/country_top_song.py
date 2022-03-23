@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 
-from top_song import TopSong
+from song.top_song import TopSong
 from utils import sort_by_value
 
 LOG_FORMAT_REGEX = r"^[0-9]+\|[0-9]+\|[A-Z]{2}$"
