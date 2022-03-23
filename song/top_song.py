@@ -29,10 +29,18 @@ class TopSong(ABC):
         pass
 
     def get_filename(self) -> str:
+        """
+        Generates the output file name as per given input file
+        :return: name of file
+        """
         log_file_date = self.input_file[7:17]
         return f"{self.get_output_file_prefix()}{log_file_date}.txt"
 
-    def discover(self):
+    def discover(self) -> None:
+        """
+        Proxy method to find the top songs
+        :return: None
+        """
         try:
             with open(self.data_path / 'input' / self.input_file) as f:
                 self.count_frequency(f)
@@ -42,5 +50,9 @@ class TopSong(ABC):
             logger.error(e)
 
     def save(self) -> None:
+        """
+        Save's formatted result in text file
+        :return: None
+        """
         with open(self.output_path / self.get_filename(), "w") as result_file:
             result_file.writelines(self.result)

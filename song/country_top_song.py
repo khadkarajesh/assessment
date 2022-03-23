@@ -16,6 +16,10 @@ class CountryTopSong(TopSong):
         super().__init__(n, data_path, output_path, input_file)
 
     def count_frequency(self, file):
+        """
+        Counts frequency of played songs as per country and stores into self.count_storage
+        :param file:
+        """
         for line in file:
             pattern = re.compile(LOG_FORMAT_REGEX)
             if pattern.match(line):
@@ -32,6 +36,9 @@ class CountryTopSong(TopSong):
                     self.count_storage[country] = {song_id: 1}
 
     def filter(self):
+        """
+        Filters the top n songs specified in self.n
+        """
         for key in self.count_storage.keys():
             songs_dict = self.count_storage.get(key)
             sorted_songs_dict = sort_by_value(songs_dict)
